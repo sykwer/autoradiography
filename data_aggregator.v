@@ -1,4 +1,4 @@
-module data_aggregator(
+module DataAggregator(
   clk, reset, bit1, bit2, bit3, bit4, read_index_yaxis, read_index_xaxis,
   out_data_yaxis, out_data_xaxis, finished,
 );

@@ -1,4 +1,4 @@
-module data_serializer(
+module DataSerializer(
   clk, reset, lower_adc_data, upper_adc_data,
   lower_adc_data_enable, upper_adc_data_enable, out_bit,
 );

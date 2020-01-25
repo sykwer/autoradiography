@@ -1,4 +1,4 @@
-module usb_controller(
+module UsbController(
   clk, reset, data_yaxis, data_xaxis, start_sending,
   read_index_yaxis, read_index_xaxis, command,
   CLK, TXE_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,

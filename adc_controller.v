@@ -1,4 +1,4 @@
-module adc_controller(
+module AdcController(
   clk, reset, start_acquisition, data_enable, is_error, data_out,
   SCLK, CNVST, RD, CS, RESET, OB2C, PD, SDOUT, RDERROR, BUSY,
 );

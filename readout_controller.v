@@ -1,4 +1,4 @@
-module readout_controller(
+module ReadoutController(
   clk, reset, running, integration_clock_count_input, start_adc1, start_adc2, start_adc3, start_adc4,
   INTG, IRST, SHS, SHR, STI, CLK,
 );

@@ -136,4 +136,9 @@ module adc_controller(
   assign data_out = data[17:2];
   assign data_enable = (mode == MODE_AFTER_ACQUISITION);
   assign is_error = (mode == MODE_ERROR_NOT_READY || mode == MODE_ERROR_RDERROR);
+
+  // ADC configuration
+  assign RD = 0;
+  assign OB2C = 0; // 2's complement
+  assign PD = 0;
 endmodule

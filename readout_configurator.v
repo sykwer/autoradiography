@@ -1,4 +1,4 @@
-module readout_configurator(
+module ReadoutConfigurator(
   SMT_MD, PDZ, NAPZ, ENTRI, INTUPZ, PGA,
 );
   output SMT_MD, PDZ, NAPZ, ENTRI, INTUPZ;

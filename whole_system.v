@@ -77,7 +77,7 @@ wire smt_md3, pdz3, napz3, entri3, intupz3;
 wire [2:0] pga3;
 SlaveFPGA fpga3(
               clk_wire, reset_wire, start_adc1_wire, start_adc2_wire, serial_data3_wire,
-              adc_y1_error, adc_y2_error,
+              adc_x1_error, adc_x2_error,
               smt_md3, pdz3, napz3, entri3, intupz3, pga3,
               SCLK_X1, CNVST_X1, RD_X1, CS_X1, RESET_X1, OB2C_X1, PD_X1, SDOUT_X1, RDERROR_X1, BUSY_X1,
               SCLK_X2, CNVST_X2, RD_X2, CS_X2, RESET_X2, OB2C_X2, PD_X2, SDOUT_X2, RDERROR_X2, BUSY_X2,
@@ -97,7 +97,7 @@ wire smt_md4, pdz4, napz4, entri4, intupz4;
 wire [2:0] pga4;
 SlaveFPGA fpga4(
               clk_wire, reset_wire, start_adc3_wire, start_adc4_wire, serial_data4_wire,
-              adc_y3_error, adc_y4_error,
+              adc_x3_error, adc_x4_error,
               smt_md4, pdz4, napz4, entri4, intupz4, pga4,
               SCLK_X3, CNVST_X3, RD_X3, CS_X3, RESET_X3, OB2C_X3, PD_X3, SDOUT_X3, RDERROR_X3, BUSY_X3,
               SCLK_X4, CNVST_X4, RD_X4, CS_X4, RESET_X4, OB2C_X4, PD_X4, SDOUT_X4, RDERROR_X4, BUSY_X4,

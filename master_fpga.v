@@ -4,8 +4,8 @@ module MasterFPGA(
   serial_data1, serial_data3, serial_data4,
   lower_adc_error, upper_adc_error,
   INTG, IRST, SHS, SHR, STI, CLK_READOUT,
-  SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0, RDERROR0, BUSY0,
-  SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1, RDERROR1, BUSY1,
+  SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0, SDOUT0, RDERROR0, BUSY0,
+  SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1, SDOUT1, RDERROR1, BUSY1,
   CLK_USB, TXE_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,
 );
   // Command enum
@@ -23,11 +23,11 @@ module MasterFPGA(
 
   // Lowwer ADC
   output SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0;
-  input RDERROR0, BUSY0;
+  input SDOUT0, RDERROR0, BUSY0;
 
   // Upper ADC
   output SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1;
-  input RDERROR1, BUSY1;
+  input SDOUT1, RDERROR1, BUSY1;
 
   // USB buffer
   input CLK_USB, TXE_N, RXF_N;
@@ -64,12 +64,12 @@ module MasterFPGA(
 
   AdcController lower_adc_controller(
     clk_in, reset, start_adc3_wire, lower_adc_data_enable_wire, lower_adc_error, lower_adc_data_wire,
-    SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0, RDOUT0, RDERROR0, BUSY0,
+    SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0, SDOUT0, RDERROR0, BUSY0,
   );
 
   AdcController upper_adc_controller(
     clk_in, reset, start_adc4_wire, upper_adc_data_enable_wire, upper_adc_error, upper_adc_data_wire,
-    SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1, RDOUT1, RDERROR1, BUSY1,
+    SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1, SDOUT1, RDERROR1, BUSY1,
   );
 
   DataSerializer data_serializer(

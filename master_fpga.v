@@ -7,6 +7,7 @@ module MasterFPGA(
            SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0, SDOUT0, RDERROR0, BUSY0,
            SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1, SDOUT1, RDERROR1, BUSY1,
            CLK_USB, TXE_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,
+           command_op_out, // tmp
        );
 // Command enum
 localparam COMMAND_NOOP = 2'b00;
@@ -37,6 +38,7 @@ inout [1:0] BE;
 
 // Error notification (LED)
 output lower_adc_error, upper_adc_error;
+output command_op_out; // tmp
 
 // Running notificatoin (LED)
 output is_on, is_off;
@@ -120,4 +122,5 @@ assign command_op_wire = command_wire[15:14];
 assign command_val_wire = command_wire[13:0];
 assign is_on = running;
 assign is_off = !running;
+assign command_op_out = command_op_wire;
 endmodule

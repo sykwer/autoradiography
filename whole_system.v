@@ -1,6 +1,7 @@
 module whole_system(
            clk, CLK_USB, TXT_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,
            adc_y_error, adc_x_error, is_on, is_off,
+           command_op_out,
        );
 output clk;
 
@@ -15,6 +16,7 @@ output adc_y_error;
 output adc_x_error;
 wire adc_y1_error, adc_y2_error, adc_y3_error, adc_y4_error;
 wire adc_x1_error, adc_x2_error, adc_x3_error, adc_x4_error;
+output command_op_out;
 
 wire clk_wire, reset_wire;
 wire start_adc1_wire, start_adc2_wire, start_adc3_wire, start_adc4_wire;
@@ -61,6 +63,7 @@ MasterFPGA fpga2(
                SCLK_Y4, CNVST_Y4, RD_Y4, CS_Y4, RESET_Y4, OB2C_Y4, PD_Y4, SDOUT_Y4, RDERROR_Y4, BUSY_Y4,
                INTG, IRST, SHS, SHR, STI, CLK_READOUT,
                CLK_USB, TXE_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,
+               command_op_out,
            );
 
 Ad7673Stub adc_y3(

@@ -1,8 +1,6 @@
 module whole_system(
   clk, CLK_USB, TXT_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,
-  adc_y1_error, adc_y2_error, adc_y3_error, adc_y4_error,
-  adc_x1_error, adc_x2_error, adc_x3_error, adc_x4_error,
-  is_on, is_off,
+  adc_y_error, adc_x_error, is_on, is_off,
 );
   output clk;
 
@@ -11,9 +9,12 @@ module whole_system(
   inout [15:0] DATA;
   inout [1:0] BE;
 
-  output adc_y1_error, adc_y2_error, adc_y3_error, adc_y4_error;
-  output adc_x1_error, adc_x2_error, adc_x3_error, adc_x4_error;
   output is_on, is_off;
+
+  output adc_y_error;
+  output adc_x_error;
+  wire adc_y1_error, adc_y2_error, adc_y3_error, adc_y4_error;
+  wire adc_x1_error, adc_x2_error, adc_x3_error, adc_x4_error;
 
   wire clk_wire, reset_wire;
   wire start_adc1_wire, start_adc2_wire, start_adc3_wire, start_adc4_wire;
@@ -115,4 +116,7 @@ module whole_system(
     INTG, IRST, SHS, SHR, STI, CLK_READOUT,
     SMT_MD, PDZ, NAPZ, ENTRI, INTUPZ, PGA,
   );
+
+  assign adc_y_error = adc_y1_error || adc_y2_error || adc_y3_error || adc_y4_error;
+  assign adc_x_error = adc_x1_error || adc_x2_error || adc_x3_error || adc_x4_error;
 endmodule

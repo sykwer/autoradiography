@@ -1,5 +1,6 @@
 module MasterFPGA(
-  clk_in, clk_out, start_adc1, start_adc2, start_adc3, start_adc4,
+  clk_in, clk_out, reset_out,
+  start_adc1, start_adc2, start_adc3, start_adc4,
   serial_data1, serial_data3, serial_data4,
   lower_adc_error, upper_adc_error,
   INTG, IRST, SHS, SHR, STI, CLK_READOUT,
@@ -16,7 +17,7 @@ module MasterFPGA(
   input clk_in;
 
   // Digital port
-  output clk_out, start_adc1, start_adc2, start_adc3, start_adc4;
+  output clk_out, reset_out, start_adc1, start_adc2, start_adc3, start_adc4;
   input serial_data1, serial_data3, serial_data4;
   output INTG, IRST, SHS, SHR, STI, CLK_READOUT;
 
@@ -103,6 +104,7 @@ module MasterFPGA(
     end
   end
 
+  assign reset_out = reset;
   assign start_adc1 = start_adc1_wire;
   assign start_adc2 = start_adc2_wire;
   assign start_adc3 = start_adc3_wire;

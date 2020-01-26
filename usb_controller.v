@@ -18,7 +18,7 @@ localparam MODE_IDLE = 0;
 localparam MODE_WILL_OE_N_DOWN = 1;
 localparam MODE_WILL_RD_N_DOWN = 2;
 localparam MODE_READING_DATA = 3;
-localparam MODE_NOTIFY_COMMAND = 4;
+localparam MODE_AFTER_READING = 4;
 localparam MODE_SENDING_DATA = 5;
 localparam MODE_SENT_DATA = 6;
 
@@ -36,7 +36,6 @@ output reg [15:0] command; // default: COMMAND_NOOP
 reg [2:0] mode_clk_cycle;
 reg [2:0] mode_CLK_cycle;
 
-reg [15:0] read_buffer;
 reg [15:0] write_buffer;
 reg [7:0] send_data_index;
 reg [15:0] data_buffer_yaxis [0:127];
@@ -53,7 +52,6 @@ initial begin
   RD_N = 1;
   WR_N = 1;
   command = COMMAND_NOOP;
-  read_buffer = 0;
   mode_CLK_cycle = MODE_IDLE;
   send_data_index = 0;
   write_buffer = 0;
@@ -134,14 +132,13 @@ always @(negedge CLK) begin
     end
 
     if (mode_CLK_cycle == MODE_READING_DATA) begin
-        read_buffer <= DATA;
-        mode_CLK_cycle <= MODE_NOTIFY_COMMAND;
+        command <= DATA;
+        mode_CLK_cycle <= AFTER_READING;
     end
 
-    if (mode_CLK_cycle == MODE_NOTIFY_COMMAND) begin
+    if (mode_CLK_cycle == MODE_AFTER_READING) begin
         OE_N <= 1;
         RD_N <= 1;
-        command <= read_buffer;
         mode_CLK_cycle <= MODE_IDLE;
     end
     // Read cycle to here

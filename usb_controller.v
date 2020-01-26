@@ -133,7 +133,7 @@ always @(negedge CLK) begin
 
     if (mode_CLK_cycle == MODE_READING_DATA) begin
         command <= DATA;
-        mode_CLK_cycle <= AFTER_READING;
+        mode_CLK_cycle <= MODE_AFTER_READING;
     end
 
     if (mode_CLK_cycle == MODE_AFTER_READING) begin

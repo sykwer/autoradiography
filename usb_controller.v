@@ -168,8 +168,8 @@ always @(negedge CLK) begin
     // Write cycle to here
 end
 
-assign DATA = !OE_N ? write_buffer : 16'bZ;
-assign BE = !OE_N ? 2'b11 : 2'bZ;
+assign DATA = OE_N ? write_buffer : 16'bZ;
+assign BE = OE_N ? 2'b11 : 2'bZ;
 assign read_index_yaxis = read_index;
 assign read_index_xaxis = read_index;
 assign data_ready = (mode_clk_cycle == MODE_DATA_READY);

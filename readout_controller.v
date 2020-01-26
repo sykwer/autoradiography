@@ -2,9 +2,9 @@ module ReadoutController(
   clk, reset, running, integration_clock_count_input, start_adc1, start_adc2, start_adc3, start_adc4,
   INTG, IRST, SHS, SHR, STI, CLK,
 );
-  // Suppose system clock is 150MHz, which is 6.777..ns/cycle.
+  // Suppose system clock is 125MHz, which is 8.06451612903..ns/cycle.
   // TODO: Change this value according to the frequency of the occilator used.
-  localparam real FREQUENCY_MHZ = 150;
+  localparam real FREQUENCY_MHZ = 125;
   localparam real NS_PER_CYCLE = 1000 / FREQUENCY_MHZ;
   // Below we define timing restriction in the number of the clock cycle.
   //
@@ -34,7 +34,7 @@ module ReadoutController(
   // Therefore, the CLK cycle should be longer than 200ns/cycle, which is 5MZ.
   // TODO: Change this valud according to the maximum conversion speed of ADC.
   // Note that this valud should be lower than or equal to 15MHZ.
-  localparam real READ_CLK_FREQUENCY_MHZ = 5;
+  localparam real READ_CLK_FREQUENCY_MHZ = 4;
   localparam integer READ_CLK_TOGGLE_INTERVAL = $ceil(FREQUENCY_MHZ / (2 * READ_CLK_FREQUENCY_MHZ));
 
   // Calculate timing constants

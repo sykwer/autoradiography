@@ -2,11 +2,11 @@ module AdcController(
   clk, reset, start_acquisition, data_enable, is_error, data_out,
   SCLK, CNVST, RD, CS, RESET, OB2C, PD, SDOUT, RDERROR, BUSY,
 );
-  // Suppose system clock is 150MHz, which is 6.777..ns/cycle.
+  // Suppose system clock is 125MHz, which is 8.06451612903..ns/cycle.
   // TODO: Change this value according to the frequency of the occilator used.
   //
   // t2 (Sampling rate) >= 800ns
-  localparam T2 = 119;
+  localparam T2 = 100;
   // t9 (Reset duration) >= 15ns
   localparam T9 = 3;
 
@@ -105,7 +105,8 @@ module AdcController(
       // Acquisition process
       if (mode == MODE_ACQUISITION) begin
         // TODO: Change this procesure when clk frequency changes
-        SCLK <= !SCLK; // 150/2 = 75MHz
+        // 67MHz <= CLK <= 100MHz
+        SCLK <= !SCLK; // 125/2 = 62.5MHz
 
         // Output is valid on posedge
         if (SCLK == 0) begin

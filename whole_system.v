@@ -16,7 +16,7 @@ output adc_y_error;
 output adc_x_error;
 wire adc_y1_error, adc_y2_error, adc_y3_error, adc_y4_error;
 wire adc_x1_error, adc_x2_error, adc_x3_error, adc_x4_error;
-output command_op_out;
+output [1:0] command_op_out;
 
 wire clk_wire, reset_wire;
 wire start_adc1_wire, start_adc2_wire, start_adc3_wire, start_adc4_wire;

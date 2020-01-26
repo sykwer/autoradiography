@@ -38,7 +38,7 @@ inout [1:0] BE;
 
 // Error notification (LED)
 output lower_adc_error, upper_adc_error;
-output command_op_out; // tmp
+output [1:0] command_op_out; // tmp
 
 // Running notificatoin (LED)
 output is_on, is_off;

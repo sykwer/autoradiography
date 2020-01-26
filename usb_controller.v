@@ -47,12 +47,16 @@ reg finish_send_data;
 output [6:0] read_index_yaxis, read_index_xaxis;
 wire data_ready;
 
+// Init valuds cannot be updated in clk cycle
+initial begin
+  OE_N = 1; // Write mode by default
+  RD_N = 1;
+  WR_N = 1;
+end
+
 integer i;
 always @(posedge clk) begin
     if (reset) begin
-        OE_N <= 1; // Write mode by default
-        RD_N <= 1;
-        WR_N <= 1;
         read_index <= 0;
         command <= COMMAND_NOOP;
         mode_clk_cycle <= MODE_WAIT_START_SENDING_UP;

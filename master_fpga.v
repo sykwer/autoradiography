@@ -89,6 +89,10 @@ module MasterFPGA(
     CLK_USB, TXE_N, RXF_N, OE_N, RD_N, WR_N, DATA, BE,
   );
 
+  initial begin
+    reset = 1;
+  end
+
   always @(posedge clk_in) begin
     if (reset) begin
       running <= 0;

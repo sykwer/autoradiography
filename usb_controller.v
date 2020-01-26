@@ -61,7 +61,7 @@ always @(posedge clk) begin
         write_buffer <= 0;
         send_data_index <= 0;
 
-        for (i = 0; i < 128; i++) begin
+        for (i = 0; i < 128; i = i + 1) begin
             data_buffer_yaxis[i] <= 0;
             data_buffer_xaxis[i] <= 0;
         end

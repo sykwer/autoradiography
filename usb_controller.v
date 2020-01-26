@@ -52,13 +52,13 @@ initial begin
   OE_N = 1; // Write mode by default
   RD_N = 1;
   WR_N = 1;
+  command = COMMAND_NOOP;
 end
 
 integer i;
 always @(posedge clk) begin
     if (reset) begin
         read_index <= 0;
-        command <= COMMAND_NOOP;
         mode_clk_cycle <= MODE_WAIT_START_SENDING_UP;
         mode_CLK_cycle <= MODE_IDLE;
         read_buffer <= 0;

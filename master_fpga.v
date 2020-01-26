@@ -2,7 +2,7 @@ module MasterFPGA(
   clk_in, clk_out, reset_out,
   start_adc1, start_adc2, start_adc3, start_adc4,
   serial_data1, serial_data3, serial_data4,
-  lower_adc_error, upper_adc_error,
+  lower_adc_error, upper_adc_error, is_on, is_off,
   INTG, IRST, SHS, SHR, STI, CLK_READOUT,
   SCLK0, CNVST0, RD0, CS0, RESET0, OB2C0, PD0, SDOUT0, RDERROR0, BUSY0,
   SCLK1, CNVST1, RD1, CS1, RESET1, OB2C1, PD1, SDOUT1, RDERROR1, BUSY1,
@@ -37,6 +37,9 @@ module MasterFPGA(
 
   // Error notification (LED)
   output lower_adc_error, upper_adc_error;
+
+  // Running notificatoin (LED)
+  output is_on, is_off;
 
   // While running, AFE keep reading the charge signal
   reg running;
@@ -115,4 +118,6 @@ module MasterFPGA(
   assign start_adc4 = start_adc4_wire;
   assign command_op_wire = command_wire[15:14];
   assign command_val_wire = command_wire[13:0];
+  assign is_on = running;
+  assign is_off = !running;
 endmodule

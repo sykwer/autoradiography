@@ -106,14 +106,6 @@ always @(posedge clk) begin
     end
 end
 
-// Read command data from client PC on CLK posedge
-always @(posedge CLK) begin
-    if (mode_CLK_cycle == MODE_READING_DATA) begin
-        read_buffer <= DATA;
-        mode_CLK_cycle <= MODE_NOTIFY_COMMAND;
-    end
-end
-
 always @(negedge CLK) begin
     if (mode_clk_cycle != MODE_DATA_READY && finish_send_data) begin
         finish_send_data <= 0;
@@ -139,6 +131,11 @@ always @(negedge CLK) begin
     if (mode_CLK_cycle == MODE_WILL_RD_N_DOWN) begin
         RD_N <= 0;
         mode_CLK_cycle <= MODE_READING_DATA;
+    end
+
+    if (mode_CLK_cycle == MODE_READING_DATA) begin
+        read_buffer <= DATA;
+        mode_CLK_cycle <= MODE_NOTIFY_COMMAND;
     end
 
     if (mode_CLK_cycle == MODE_NOTIFY_COMMAND) begin

@@ -53,6 +53,10 @@ initial begin
   RD_N = 1;
   WR_N = 1;
   command = COMMAND_NOOP;
+  read_buffer = 0;
+  mode_CLK_cycle = MODE_IDLE;
+  send_data_index = 0;
+  write_buffer = 0;
 end
 
 integer i;
@@ -60,10 +64,6 @@ always @(posedge clk) begin
     if (reset) begin
         read_index <= 0;
         mode_clk_cycle <= MODE_WAIT_START_SENDING_UP;
-        mode_CLK_cycle <= MODE_IDLE;
-        read_buffer <= 0;
-        write_buffer <= 0;
-        send_data_index <= 0;
 
         for (i = 0; i < 128; i = i + 1) begin
             data_buffer_yaxis[i] <= 0;

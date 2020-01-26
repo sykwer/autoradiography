@@ -4,28 +4,28 @@ module ReadoutController(
        );
 // Suppose system clock is 125MHz, which is 8.06451612903..ns/cycle.
 // TODO: Change this value according to the frequency of the occilator used.
-localparam real FREQUENCY_MHZ = 125;
-localparam real NS_PER_CYCLE = 1000 / FREQUENCY_MHZ;
+localparam integer FREQUENCY_MHZ = 125;
+localparam integer NS_PER_CYCLE = (1000 + FREQUENCY_MHZ - 1) / FREQUENCY_MHZ;
 // Below we define timing restriction in the number of the clock cycle.
 //
 // t1 (IRST, SHR, SHS, STI high duration) >= 30ns
-localparam integer T1 = $ceil(30 / NS_PER_CYCLE);
+localparam integer T1 = (30 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t2 (Setup time, STI, IRST falling edge to first clock rising edge) >= 30ns
-localparam integer T2 = $ceil(30 / NS_PER_CYCLE);
+localparam integer T2 = (30 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t3 (Delay time, 133rd clock rising edge to SHR rising edge) >= 400ns
-localparam integer T3 = $ceil(400 / NS_PER_CYCLE);
+localparam integer T3 = (400 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t4 (Delay time, SHR rising edge to INTG rising edge) >= 30ns
-localparam integer T4 = $ceil(30 / NS_PER_CYCLE);
+localparam integer T4 = (30 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t5 (INTG high duration) >= 14us
 // Get integration duration as configuration parameter from the host PC.
 // t6 (Delay time, INTG falling edge to SHS rising edge) >= 4.5us
-localparam integer T6 = $ceil(4500 / NS_PER_CYCLE);
+localparam integer T6 = (4500 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t7 (Delay time, SHS rising edge to IRST rising edge) >= 30ns
-localparam integer T7 = $ceil(30 / NS_PER_CYCLE);
+localparam integer T7 = (30 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t8 (Delay time, SHS rising edge to STI rising edge) >= 30ns
-localparam integer T8 = $ceil(30 / NS_PER_CYCLE);
+localparam integer T8 = (30 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 // t9 (Hold time, STI falling edge to IRST falling edge) >= 10ns
-localparam integer T9 = $ceil(10 / NS_PER_CYCLE);
+localparam integer T9 = (10 + NS_PER_CYCLE - 1) / NS_PER_CYCLE;
 
 // CLK clock cycle is restricted to 15MHz at maximum speed.
 // On the other hand, the highest conversion frequency of AD7673 is 1.25MSPS
@@ -35,7 +35,7 @@ localparam integer T9 = $ceil(10 / NS_PER_CYCLE);
 // TODO: Change this valud according to the maximum conversion speed of ADC.
 // Note that this valud should be lower than or equal to 15MHZ.
 localparam real READ_CLK_FREQUENCY_MHZ = 4;
-localparam integer READ_CLK_TOGGLE_INTERVAL = $ceil(FREQUENCY_MHZ / (2 * READ_CLK_FREQUENCY_MHZ));
+localparam integer READ_CLK_TOGGLE_INTERVAL = (FREQUENCY_MHZ + (2 * READ_CLK_FREQUENCY_MHZ) - 1) / (2 * READ_CLK_FREQUENCY_MHZ);
 
 // Calculate timing constants
 localparam START_CLOCK = 0;

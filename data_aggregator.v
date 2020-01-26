@@ -37,7 +37,7 @@ wire data_yaxis_valid, data_xaxis_valid;
 integer i;
 always @(posedge clk) begin
     if (reset) begin
-        for (i = 0; i < 128; i++) begin
+        for (i = 0; i < 128; i = i + 1) begin
             data_yaxis[i] = 0;
             data_xaxis[i] = 0;
         end

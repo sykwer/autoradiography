@@ -57,6 +57,7 @@ initial begin
   mode_CLK_cycle = MODE_IDLE;
   send_data_index = 0;
   write_buffer = 0;
+  finish_send_data = 0;
 end
 
 integer i;
@@ -69,8 +70,6 @@ always @(posedge clk) begin
             data_buffer_yaxis[i] <= 0;
             data_buffer_xaxis[i] <= 0;
         end
-
-        finish_send_data <= 0;
     end else begin
         if (mode_clk_cycle == MODE_WAIT_START_SENDING_UP) begin
             if (start_sending) begin
@@ -86,7 +85,6 @@ always @(posedge clk) begin
                 read_index <= read_index - 1;
             end else begin
                 mode_clk_cycle <= MODE_RECEIVED_DATA;
-                finish_send_data <= 0;
             end
         end
 
@@ -117,6 +115,10 @@ always @(posedge CLK) begin
 end
 
 always @(negedge CLK) begin
+    if (mode_clk_cycle != MODE_DATA_READY && finish_send_data) begin
+        finish_send_data <= 0;
+    end
+
     if (mode_CLK_cycle == MODE_IDLE) begin
         if (RXF_N == 0) begin
             mode_CLK_cycle <= MODE_WILL_OE_N_DOWN;
